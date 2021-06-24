@@ -11,7 +11,7 @@ def parse_kitti_txt(txt_path, check_validity=True):
     # Convert to correct format
     for line in lines:
 
-        assert len(line) == 15 # Number of columns is correct
+        assert len(line) == 15 or len(line) == 16 # Number of columns is correct
 
         # Data type is correct
         line[0] = str(line[0])

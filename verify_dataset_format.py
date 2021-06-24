@@ -28,6 +28,7 @@ if __name__ == "__main__":
                     help='dataset format e.g. kitti, darknet')
     parser.add_argument('--names', type=str, default=None,
                     help='label file for darknet format')
+    
     args = parser.parse_args()
     print(args)
 
@@ -35,7 +36,9 @@ if __name__ == "__main__":
     img_paths = get_all_image_paths(root_dir)
     txt_paths = get_all_txt_paths(root_dir)
 
-    assert len(img_paths) >= len(txt_paths) # Number of txt files must be less than number of images
+    if not len(img_paths) >= len(txt_paths):
+        print(f"len(img_paths)={len(img_paths)}, len(txt_paths)={len(txt_paths)}, len(img_paths) >= len(txt_paths) -> {len(img_paths) >= len(txt_paths)}")
+        assert False # Number of txt files must be less than number of images
     print(f"Image files found: \t{len(img_paths)}\nText files found: \t{len(txt_paths)}")
 
     for txt_path in txt_paths:
