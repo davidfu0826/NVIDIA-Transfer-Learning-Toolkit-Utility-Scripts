@@ -44,6 +44,7 @@ def parse_kitti_txt(txt_path, check_validity=True):
     lines = [line.replace('\n', '').split() for line in lines]
     # Convert to correct format
     for line in lines:
+        print(line)
         assert len(line) == 15 # Number of columns is correct
 
         # Data type is correct
@@ -145,8 +146,11 @@ if __name__ == "__main__":
     for txt_path in txt_paths:
         jpg_path = txt_path.replace("/labels/", "/images/").replace(".txt", ".jpg")
         png_path = txt_path.replace("/labels/", "/images/").replace(".txt", ".png")
-
-        assert os.path.isfile(jpg_path) and os.path.isfile(png_path) # For every text file, the corresponding image must exist
+        if os.path.isfile(jpg_path) or os.path.isfile(png_path):
+            pass
+        else:
+            print(f"There is no corresponding image for {txt_path}")	
+            assert False # For every text file, the corresponding image must exist
 
     # Example
     #   car        0.00 0 -1.58 587.01 173.33 614.12 200.12 1.65 1.67 3.64 -0.65 1.71 46.70 -1.59
@@ -161,7 +165,7 @@ if __name__ == "__main__":
             # Parse data
             bboxes = parse_kitti_txt(txt_path)
             for bbox in bboxes:
-                classes.add(bbox[0])
+                classes.append(bbox[0])
         print(f"Classes found: {set(classes)}")
         
 
@@ -173,8 +177,7 @@ if __name__ == "__main__":
             # Parse data
             bboxes = parse_darknet_txt(txt_path)
             for bbox in bboxes:
-                class_indicies.add(bbox[0])
-        print(f"Classes indicies found: {set(class_indicies)}. Tip: Set '--names' if you want flag names")
+                class_indicies.append(bbox[0])
 
         if args.names is not None:
             idx2name = parse_darknet_label_file(args.names)
@@ -182,6 +185,11 @@ if __name__ == "__main__":
             for class_idx in set(class_indicies):
                 class_name = idx2name[class_idx]
                 class_names.append(class_name)
+
+            print(f"Classes indicies found: {set(class_names)}.")
+
+        else:
+            print(f"Classes indicies found: {set(class_indicies)}. Tip: Set '--names' if you want flag names")
 
 
 

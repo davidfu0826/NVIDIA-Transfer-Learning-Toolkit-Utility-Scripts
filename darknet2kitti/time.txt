@@ -1,0 +1,6 @@
+2 h - More debugging for darknet2kitti.py and darknet_label_remapper.py
+2 h - Install TLT
+1 h - research TLT and book DGX-1
+2 h - darknet2kitti.py
+1 h - darknet_label_remapper.py
+1 h - Research Azure VM and dataset
