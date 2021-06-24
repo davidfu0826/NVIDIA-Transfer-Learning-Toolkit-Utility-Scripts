@@ -28,7 +28,8 @@ if __name__ == "__main__":
                     help='dataset format e.g. kitti, darknet')
     parser.add_argument('--names', type=str, default=None,
                     help='label file for darknet format')
-    
+    parser.add_argument('--ignore-assert', action="store_true",
+                    help='Ignore assertions')
     args = parser.parse_args()
     print(args)
 
@@ -61,7 +62,11 @@ if __name__ == "__main__":
         classes = list()
         for txt_path in txt_paths:
             # Parse data
-            bboxes = parse_kitti_txt(txt_path)
+            if args.ignore_assert:
+                bboxes = parse_kitti_txt(txt_path, check_validity=False)
+            else:
+                bboxes = parse_kitti_txt(txt_path)
+
             for bbox in bboxes:
                 classes.append(bbox[0])
         print(f"Classes found: {set(classes)}")
@@ -73,7 +78,11 @@ if __name__ == "__main__":
         class_indicies = list()
         for txt_path in txt_paths:
             # Parse data
-            bboxes = parse_darknet_txt(txt_path)
+            if args.ignore_assert:
+                bboxes = parse_darknet_txt(txt_path, check_validity=False)
+            else:
+                bboxes = parse_darknet_txt(txt_path)
+
             for bbox in bboxes:
                 class_indicies.append(bbox[0])
 
