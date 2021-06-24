@@ -1,0 +1,6 @@
+darknet2kitti/train
+darknet2kitti/valid
+darknet2kitti/output
+output/
+darknet2kitti/.ipynb_checkpoints/
+utils/__pycache__

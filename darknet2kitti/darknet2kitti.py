@@ -12,7 +12,7 @@ if __name__ == "__main__":
     parser.add_argument('-i', "--input", help="input to convert to kitti format (directory or file .txt)")
 
     parser.add_argument('-l', '--label', help="darknet labels (.label)")
-    parser.add_argument('-l', '--tlt', help="Make compatible with NVIDIA Transfer Learning Toolkit 3.0", action="store_true")
+    parser.add_argument('-tlt', help="Make compatible with NVIDIA Transfer Learning Toolkit 3.0", action="store_true")
     #parser.add_argument('-w', "--walk", help="os.walk inside the directory")
     args = parser.parse_args()
 
