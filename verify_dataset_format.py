@@ -124,7 +124,7 @@ def parse_darknet_label_file(label_file_path):
         class_names = f.readlines()
     return {idx: class_name.replace("\n", '') for idx, class_name in enumerate(class_names)}
 
-if __name__ == "__name__":
+if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Verify dataset format.')
     parser.add_argument('--dir-path', type=str, required=True,
                         help='path to dataset')
